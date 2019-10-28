@@ -25,8 +25,8 @@ $(document).ready(function () {
 		}
 	});
 
-	$("#add").on("click", function (e) {
-		$("#save").text("Add");
+	$("#btnAdd").on("click", function (e) {
+		$("#btnSave").text("Add");
 		$("#id").val(0);
 		$("#name").val("");
 		$("#exchange").val("");
@@ -36,7 +36,7 @@ $(document).ready(function () {
 		$("#inputDialog").modal("show");
 	});
 
-	$("#save").on("click", function (e) {
+	$("#btnSave").on("click", function (e) {
 		$("#inputDialog").modal("hide");
 
 		var item = {
@@ -53,7 +53,7 @@ $(document).ready(function () {
 			item.website = website;
 		}
 
-		if ($("#save").text() == "Add") {
+		if ($("#btnSave").text() == "Add") {
 			addItem(item);
 		} else {
 			updateItem(item);
@@ -144,7 +144,7 @@ function reloadTable(items) {
 }
 
 function updateInputForm(item) {
-	$("#save").text("Update");
+	$("#btnSave").text("Update");
 	$("#id").val(item.id);
 	$("#name").val(item.name);
 	$("#exchange").val(item.exchange);
