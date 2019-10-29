@@ -28,6 +28,8 @@ namespace CompanyAPI
 
 			services.AddControllers();
 
+			services.AddMvcCore().AddDataAnnotations();
+
 			services.AddSwaggerGen(c =>
 			{
 				c.SwaggerDoc("v1", new OpenApiInfo { Title = "Company API", Version = "v1" });
