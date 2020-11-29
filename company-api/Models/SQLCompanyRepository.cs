@@ -1,20 +1,21 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace CompanyAPI.Models
 {
 	public class SQLCompanyRepository : ICompanyRepository
 	{
-		private readonly CompanyDBContext context;
+		private readonly DataContext context;
 
-		public SQLCompanyRepository(CompanyDBContext context)
+		public SQLCompanyRepository(DataContext context)
 		{
 			this.context = context;
 		}
 
 		public Company Add(Company item)
 		{
-			context.Add(item);
+      item.Id = GetNextId();
+      context.Add(item);
 			context.SaveChanges();
 			return item;
 		}
@@ -50,5 +51,11 @@ namespace CompanyAPI.Models
 
 			return company;
 		}
+
+    private int GetNextId()
+    {
+      var item = context.Company.OrderByDescending(c => c.Id).First();
+      return item.Id + 1;
+    }
 	}
 }

@@ -21,8 +21,9 @@ namespace CompanyAPI
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
-			services.AddDbContextPool<CompanyDBContext>(
-				options => options.UseSqlServer(Configuration.GetConnectionString("CompanyDB")));
+			services.AddDbContextPool<DataContext>(
+				options => options.UseInMemoryDatabase("CompanyDB")
+      );
 
 			services.AddScoped<ICompanyRepository, SQLCompanyRepository>();
 
@@ -39,12 +40,18 @@ namespace CompanyAPI
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 		{
-			if (env.IsDevelopment())
-			{
-				app.UseDeveloperExceptionPage();
-			}
+      if (env.IsDevelopment())
+      {
+        app.UseDeveloperExceptionPage();
+      }
 
-			app.UseDefaultFiles();
+      using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+      {
+        var context = serviceScope.ServiceProvider.GetRequiredService<DataContext>();
+        context.Database.EnsureCreated();
+      }
+
+      app.UseDefaultFiles();
 			app.UseStaticFiles();
 			app.UseHttpsRedirection();
 			app.UseRouting();

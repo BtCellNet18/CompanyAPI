@@ -1,12 +1,11 @@
-﻿using CompanyAPI.Models;
+using CompanyAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 
 namespace CompanyAPI.Controllers
 {
-	[ApiController]
+  [ApiController]
 	[Route("api/[controller]")]
 	public class CompanyController : ControllerBase
 	{
