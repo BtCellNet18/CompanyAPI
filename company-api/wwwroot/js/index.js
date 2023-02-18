@@ -1,4 +1,6 @@
 ﻿$(document).ajaxComplete(function (event, xhr, settings) {
+	hide("loading");
+	show("tBody");
 	$("#alertMessage").text("HTTP Status " + xhr.status);
 	console.log(JSON.stringify(xhr.responseJSON));
 });
@@ -62,6 +64,8 @@ $(document).ready(function () {
 });
 
 function getAll() {
+	show("loading");
+	hide("tBody");
 	$.ajax({
 		url: "/api/Company/",
 		type: "GET",
@@ -152,4 +156,12 @@ function updateInputForm(item) {
 	$("#isin").val(item.isin);
 	$("#website").val(item.website);
 	$("#inputDialog").modal("show");
+}
+
+function show(id) {
+    document.getElementById(id).style.visibility = 'visible';
+}
+
+function hide(id) {
+    document.getElementById(id).style.visibility = 'hidden';
 }
