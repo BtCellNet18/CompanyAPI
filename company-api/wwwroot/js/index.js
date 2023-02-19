@@ -1,6 +1,4 @@
 ﻿$(document).ajaxComplete(function (event, xhr, settings) {
-	hide("loading");
-	show("tBody");
 	$("#alertMessage").text("HTTP Status " + xhr.status);
 	console.log(JSON.stringify(xhr.responseJSON));
 });
@@ -64,14 +62,16 @@ $(document).ready(function () {
 });
 
 function getAll() {
-	show("loading");
-	hide("tBody");
+	showSpinner();
 	$.ajax({
 		url: "/api/Company/",
 		type: "GET",
 		dataType: "json",
 		success: function (data) {
 			reloadTable(data);
+		},
+		complete: function() {
+			hideSpinner();
 		}
 	});
 }
@@ -164,4 +164,14 @@ function show(id) {
 
 function hide(id) {
     document.getElementById(id).style.visibility = 'hidden';
+}
+
+function showSpinner() {
+	show("loading");
+	hide("tBody");
+}
+
+function hideSpinner() {
+	hide("loading");
+	show("tBody");
 }
