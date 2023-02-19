@@ -1,4 +1,5 @@
 ﻿$(document).ajaxComplete(function (event, xhr, settings) {
+	hideSpinner();
 	$("#alertMessage").text("HTTP Status " + xhr.status);
 	console.log(JSON.stringify(xhr.responseJSON));
 });
@@ -69,7 +70,6 @@ function getAll() {
 		dataType: "json",
 		success: function (data) {
 			reloadTable(data);
-			hideSpinner();
 		}
 	});
 }
@@ -157,11 +157,13 @@ function updateInputForm(item) {
 }
 
 function showSpinner() {
-	$("#loading").toggleClass("d-flex").show();
+	$("#loading").addClass("d-flex");
+	$("#loading").show();
 	$("#tBody").hide();
 }
 
 function hideSpinner() {
-	$("#loading").toggleClass("d-flex").hide();
+	$("#loading").removeClass("d-flex");
+	$("#loading").hide();
 	$("#tBody").show();
 }
