@@ -157,13 +157,11 @@ function updateInputForm(item) {
 }
 
 function showSpinner() {
-	$("#loading").addClass("d-flex");
-	$("#loading").show();
-	$("#tBody").hide();
+	document.getElementById("loading").style.visibility = 'visible';
+	document.getElementById("table").style.visibility = 'hidden';	
 }
 
 function hideSpinner() {
-	$("#loading").removeClass("d-flex");
-	$("#loading").hide();
-	$("#tBody").show();
+	document.getElementById("loading").style.visibility = 'hidden';
+	document.getElementById("table").style.visibility = 'visible';	
 }
