@@ -69,8 +69,6 @@ function getAll() {
 		dataType: "json",
 		success: function (data) {
 			reloadTable(data);
-		},
-		complete: function() {
 			hideSpinner();
 		}
 	});
@@ -158,20 +156,12 @@ function updateInputForm(item) {
 	$("#inputDialog").modal("show");
 }
 
-function show(id) {
-    document.getElementById(id).style.visibility = 'visible';
-}
-
-function hide(id) {
-    document.getElementById(id).style.visibility = 'hidden';
-}
-
 function showSpinner() {
-	show("loading");
-	hide("tBody");
+	$("#loading").show();
+	$("#tBody").hide();
 }
 
 function hideSpinner() {
-	hide("loading");
-	show("tBody");
+	$("#loading").hide();
+	$("#tBody").show();
 }
