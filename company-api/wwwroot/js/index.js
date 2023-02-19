@@ -157,11 +157,11 @@ function updateInputForm(item) {
 }
 
 function showSpinner() {
-	$("#loading").show();
+	$("#loading").toggleClass("d-flex").show();
 	$("#tBody").hide();
 }
 
 function hideSpinner() {
-	$("#loading").hide();
+	$("#loading").toggleClass("d-flex").hide();
 	$("#tBody").show();
 }
